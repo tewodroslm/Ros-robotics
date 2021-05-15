@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ted/Documents/Projects/ROS/create node/catkin_ws/install/setup.sh

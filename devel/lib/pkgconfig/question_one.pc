@@ -1,0 +1,8 @@
+prefix=/home/ted/Documents/Projects/ROS/create node/catkin_ws/devel
+
+Name: question_one
+Description: Description of question_one
+Version: 0.0.0
+Cflags: -I/home/ted/Documents/Projects/ROS/create node/catkin_ws/devel/include
+Libs: -L${prefix}/lib 
+Requires: rospy std_msgs

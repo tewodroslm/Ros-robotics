@@ -1,0 +1,8 @@
+prefix=/home/ted/Documents/Projects/ROS/gazebolab/catkin_ws/install
+
+Name: arm_gazebo
+Description: Description of arm_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp gazebo_ros arm_lib

@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ted/Documents/Projects/ROS/gazebolab/catkin_ws/install/setup.sh

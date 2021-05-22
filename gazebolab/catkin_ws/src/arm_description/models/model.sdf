@@ -1,0 +1,151 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+    <model name="my_robot">
+        <static>false</static>
+        <self_collide>1</self_collide>
+        <link name='chassis'>
+            <pose>0 0 .05 0 0 0</pose>
+
+            <collision name='collision'>
+                <geometry>
+                    <cylinder>
+                        <radius>5.5</radius>
+                        <length>.1</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+
+            <visual name='visual'>
+                <geometry>
+                    <cylinder>
+                        <radius>.5</radius>
+                        <length>.1</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+        </link>
+        <link name='arm1'>
+            <pose>0 0 .125 0 0 0</pose>
+
+            <collision name='collision'>
+                <geometry>
+                    <cylinder>
+                        <radius>.1</radius>
+                        <length>.05</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+
+            <visual name='visual'>
+                <geometry>
+                    <cylinder>
+                        <radius>.1</radius>
+                        <length>.05</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+        </link>
+        <link name='arm2'>
+            <pose>0 0 1.15 0 0 0</pose>
+
+            <collision name='collision'>
+                <geometry>
+                    <cylinder>
+                        <radius>.05</radius>
+                        <length>2.0</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+
+            <visual name='visual'>
+                <geometry>
+                    <cylinder>
+                        <radius>.05</radius>
+                        <length>2.0</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+        </link>
+        <link name='arm3'>
+            <pose>0 0 2.65 0 0 0</pose>
+
+            <collision name='collision'>
+                <geometry>
+                    <cylinder>
+                        <radius>.05</radius>
+                        <length>1.0</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+
+            <visual name='visual'>
+                <geometry>
+                    <cylinder>
+                        <radius>.05</radius>
+                        <length>1.0</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+        </link>
+        <link name='arm4'>
+            <pose>0 0 3.4 0 0 0</pose>
+
+            <collision name='collision'>
+                <geometry>
+                    <cylinder>
+                        <radius>.05</radius>
+                        <length>.5</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+
+            <visual name='visual'>
+                <geometry>
+                    <cylinder>
+                        <radius>.05</radius>
+                        <length>.5</length>
+                    </cylinder>
+                </geometry>
+            </visual>
+        </link>
+        <joint type="revolute" name="chasis_arm1_joint">
+            <pose>0 0 -0.025 0 0 0</pose>
+            <child>arm1</child>
+            <parent>chassis</parent>
+            <axis>
+                <xyz>0 0 1</xyz>
+            </axis>
+        </joint>
+         <joint type="revolute" name="arm1_arm2_joint">
+            <pose>0 0 -1 0 0 0</pose>
+            <child>arm2</child>
+            <parent>arm1</parent>
+            <axis>
+                <xyz>1 0 0</xyz>
+            </axis>
+        </joint>
+        <joint type="revolute" name="arm2_arm3_joint">
+            <pose>0 0 -0.5 0 0 0</pose>
+            <child>arm3</child>
+            <parent>arm2</parent>
+            <axis>
+                <xyz>1 0 0</xyz>
+            </axis>
+        </joint>
+
+        <joint type="revolute" name="arm3_arm4_joint">
+            <pose>0 0 -0.25 0 0 0</pose>
+            <child>arm4</child>
+            <parent>arm3</parent>
+            <axis>
+                <xyz>1 0 0</xyz>
+            </axis>
+        </joint>
+        <plugin name="arm_control" filename="libarm_gazebo.so" />
+
+    </model>
+</sdf>
+
+
+
+

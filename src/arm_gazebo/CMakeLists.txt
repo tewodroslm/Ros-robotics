@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(arm_gazebo)
-
+find_package(roscpp REQUIRED)
+find_package(std_msgs REQUIRED)
+include_directories(${roscpp_INCLUDE_DIRS})
+include_directories(${std_msgs_INCLUDE_DIRS})
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
@@ -25,17 +28,25 @@ include_directories(${Boost_INCLUDE_DIR}
               ${roscpp_INCLUDE_DIRS}
               ${std_msgs_INCLUDE_DIRS})
 
-add_library(controller SHARED src/controller.cpp)
-target_link_libraries(Listener ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
+add_library(${PROJECT_NAME} SHARED src/controller.cpp)
+
 # EDIT START -----------
 
 #target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES}) 
 
 add_library(Listener SHARED src/Listeners.cpp)
-target_link_libraries(Listener ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
+target_link_libraries(Listener ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
 
-
+add_executable(vel src/talker.cc)
+if (${gazebo_VERSION_MAJOR} LESS 6)
+  # These two
+  include(FindBoost)
+  find_package(Boost ${MIN_BOOST_VERSION} REQUIRED system filesystem regex)
+  target_link_libraries(vel ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
+else()
+  target_link_libraries(vel ${GAZEBO_LIBRARIES})
+endif()
 # EDIT END -----------
 
 ## System dependencies are found with CMake's conventions

@@ -1,0 +1,1 @@
+For the last problem(4th question) i changed the gazebo::transport::NodePtr to ros::NodeHandle n that is why there is two solutions which are inside arm_gazebo package /src and /script for the 4th question.

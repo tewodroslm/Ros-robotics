@@ -6,26 +6,6 @@
 #include <iostream>
 
 
-// Quaternion class.
-class Quaternion
-{
-public:
-   Quaternion() { }
-   Quaternion(float wVal, float xVal, float yVal, float zVal)
-   {
-      w = wVal; x= xVal; y = yVal; z = zVal;
-   }
-   float getW() { return w; }
-   float getX() { return x; }
-   float getY() { return y; }
-   float getZ() { return z; }
-
-public:
-   float w, x, y, z;
-};
-
-//static Quaternion identityQuaternion(1.0, 0.0, 0.0, 0.0), q; // Global identity quaternion.
-
 int main(int _argc, char **_argv)
 {
     
@@ -47,9 +27,7 @@ int main(int _argc, char **_argv)
 
         std::stringstream ss;
                 
-        //Quaternion *_msg;
-
-       // _msg = new Quaternion( std::atof(_argv[1]), std::atof(_argv[2]), std::atof(_argv[3]), std::atof(_argv[4]) );
+         
 
         ss << _argv[1] << " " << _argv[2] << " " << _argv[3] << " " << _argv[4] << " ";
         msg.data = ss.str();

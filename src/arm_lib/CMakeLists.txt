@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(question_one)
+project(arm_lib)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,32 +8,10 @@ project(question_one)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  arm_lib
   roscpp
   rospy
   std_msgs
-  gazebo_ros
-
 )
-find_package(gazebo REQUIRED)
-
-link_directories(${GAZEBO_LIBRARY_DIRS})
-include_directories(${Boost_INCLUDE_DIR} 
-              ${catkin_INCLUDE_DIRS} 
-              ${GAZEBO_INCLUDE_DIRS} 
-              ${roscpp_INCLUDE_DIRS}
-              ${std_msgs_INCLUDE_DIRS})
-
-add_library(controller SHARED src/controller.cpp)
-target_link_libraries(Listener ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
-# EDIT START -----------
-
-#target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
-
-add_library(Listener SHARED src/Listeners.cpp)
-target_link_libraries(Listener ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
-
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -69,11 +47,11 @@ target_link_libraries(Listener ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
-   Input.msg
+# add_message_files(
+#   FILES
+#   Message1.msg
 #   Message2.msg
- )
+# )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -90,10 +68,10 @@ target_link_libraries(Listener ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_
 # )
 
 ## Generate added messages and services with any dependencies listed here
- generate_messages(
-   DEPENDENCIES
-   std_msgs
- )
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -126,8 +104,8 @@ target_link_libraries(Listener ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES question_one
-  CATKIN_DEPENDS rospy std_msgs
+#  LIBRARIES arm_lib
+#  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -144,7 +122,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/question_one.cpp
+#   src/${PROJECT_NAME}/arm_lib.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -155,7 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/question_one_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/arm_lib_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -219,7 +197,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_question_one.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_arm_lib.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

@@ -7,4 +7,3 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/ted/Documents/Projects/ROS/create node/catkin_ws/build'

@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   gazebo_ros
+  message_generation
 
 )
 
@@ -27,13 +28,10 @@ include_directories(${Boost_INCLUDE_DIR}
               ${GAZEBO_INCLUDE_DIRS} 
               ${roscpp_INCLUDE_DIRS}
               ${std_msgs_INCLUDE_DIRS})
-
-add_library(${PROJECT_NAME} SHARED src/controller.cpp)
+ 
 
 # EDIT START -----------
 
-#target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES}) 
 
 add_library(Listener SHARED src/Listeners.cpp)
 target_link_libraries(Listener ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
@@ -43,11 +41,17 @@ if (${gazebo_VERSION_MAJOR} LESS 6)
   # These two
   include(FindBoost)
   find_package(Boost ${MIN_BOOST_VERSION} REQUIRED system filesystem regex)
-  target_link_libraries(vel ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
+  target_link_libraries(vel ${roscpp_LIBRARIES} ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES})
 else()
-  target_link_libraries(vel ${GAZEBO_LIBRARIES})
+  target_link_libraries(vel ${roscpp_LIBRARIES})
 endif()
 # EDIT END -----------
+
+# catch release
+add_executable(Care src/CatchRelease.cc)
+target_link_libraries(Care ${GAZEBO_LIBRARIES} ${roscpp_LIBRARIES})
+# End
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -83,17 +87,17 @@ endif()
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
+ add_message_files(
+   FILES
 #   Message1.msg
-#   Message2.msg
-# )
+   Input.msg
+ )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
 #   FILES
-#   Service1.srv
-#   Service2.srv
+#   FK.srv
+#   Ik.srv
 # )
 
 ## Generate actions in the 'action' folder
@@ -104,10 +108,10 @@ endif()
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##

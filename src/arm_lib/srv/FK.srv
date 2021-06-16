@@ -1,0 +1,6 @@
+float32[] joint_angles
+float32[] link_length
+---
+float32[] actuator_pose
+
+

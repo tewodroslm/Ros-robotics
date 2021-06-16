@@ -4,4 +4,11 @@ For the third question it is inside /script named JointAnglePublisher.cpp
 And solution for question one is inside question_one folder
 
 
-We have include images showing the output and the method we followed to calculate the joint pos
+Name                     id
+
+Tewodros Lemma       atr/9971/09
+Filiya H/Michael     atr/1684/09
+Tariku W/Michael     ATR/9578/09
+Ibrahim Abas         atr/0799/09
+Surafel Mohammod     ATR/1225/09
+
